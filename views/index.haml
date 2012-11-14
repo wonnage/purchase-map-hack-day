@@ -1,0 +1,12 @@
+%html
+  %head
+    %title WellnessFX Purchase Map
+    %script{src: 'javascripts/jquery-1.8.2.min.js'}
+    %script{src: 'javascripts/underscore-min.js'}
+    %script{src: 'javascripts/polymaps.js'}
+    %script{src: 'javascripts/app.js'}
+    %link{rel: 'stylesheet', type: 'text/css', href: 'stylesheets/example.css'}
+    :javascript
+      var active_state_abbrevs = #{JSON.unparse(@valid_member_states)};
+  %body
+    #map
