@@ -7,7 +7,7 @@ $(function() {
   var map = po.map()
             .container($('#map').append(po.svg('svg')).find('svg').get(0))
             .center({lat: 40, lon: -95})
-            .zoomRange([3, 7])
+            .zoomRange([4, 10])
             .zoom(4);
   map.add(po.image()
     .url(po.url("http://{S}tile.cloudmade.com"
@@ -27,10 +27,10 @@ $(function() {
 
   $('#map').click(function(e) {
     var $elem = $(e.target);
-    if($elem.attr('class').match(/has-purchases/)) {
+    if($elem.attr('class') && $elem.attr('class').match(/has-purchases/)) {
       var county = $elem.data();
-      $('#county_id').text('County ID: '+county.countyId);
       $('#county_amount').text('$'+county.amount);
+      $('#county_name').text(county.name + ' County');
     }
   });
   function loadStates(e) {
@@ -62,6 +62,7 @@ $(function() {
         }
         feature.element.setAttribute("class", 'county '+moneyClass);
         feature.element.setAttribute("data-county-id", feature.data.id);
+        feature.element.setAttribute("data-name", feature.data.properties.name);
         feature.element.setAttribute("data-amount", purchases_for_county || 0);
       }
     });
